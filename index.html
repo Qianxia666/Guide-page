@@ -191,6 +191,51 @@
         .modal button:hover {
             background-color: #0056b3;
         }
+        /* 新代码样式 */
+        .container {
+            max-width: 2000px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 10%;
+
+        }
+        .container h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .faq-item {
+            border-top: 1px solid #eee;
+            padding: 15px 0;
+        }
+        .faq-item:first-child {
+            border-top: none;
+        }
+        .faq-question {
+            font-size: 18px;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-answer {
+            margin-top: 10px;
+            display: none;
+            font-size: 16px;
+            color: #666;
+        }
+        .faq-answer.active {
+            display: block;
+        }
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+        .faq-question i.rotate {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 <body>
@@ -213,6 +258,29 @@
     </div>
     <div class="page page2">
         <div class="overlay"></div>
+        <!-- 新代码开始 -->
+        <div class="container">
+            <h2>动态</h2>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleAnswer(this)">
+                    <span>怎样获取网站密码？</span>
+                    <i>&#x25BC;</i>
+                </div>
+                <div class="faq-answer">
+                    <p>感谢您关注本项目，我们深感荣幸。目前网站仍属于内测阶段，网站密码还在灰度发放，劳烦请您耐心等待！</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleAnswer(this)">
+                    <span>关于API的通知</span>
+                    <i>&#x25BC;</i>
+                </div>
+                <div class="faq-answer">
+                    <p>大家好，本网站采用对接第三方企业网关，并由第三方企业发送相关请求至大模型服务器的方式进行对话，本网站没有自研大模型产品，如有问题还请大家多多包涵！</p>
+                </div>
+            </div>
+        </div>
+        <!-- 新代码结束 -->
         <div class="text">
             <h1>让AIGC<br>为您的梦想如虎添翼！</h1>
             <p>Let AIGC give wings to your dreams.</p>
@@ -291,6 +359,16 @@
             document.getElementById('overlay').style.display = 'none';
             startCountdown();
         });
+
+        // 新代码脚本
+        function toggleAnswer(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            if (answer) {
+                answer.classList.toggle('active');
+                icon.classList.toggle('rotate');
+            }
+        }
     </script>
 </body>
 </html>
