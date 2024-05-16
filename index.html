@@ -121,6 +121,45 @@
         .language-switch span:hover {
             color: black;
         }
+        /* 覆盖层样式 */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal {
+            background: white;
+            padding: 50px; /* 增大内边距 */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px; /* 增大最大宽度 */
+            width: 90%;
+        }
+        .modal p {
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+        .modal button {
+            padding: 10px 20px;
+            font-size: 22px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .modal button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -139,69 +178,88 @@
     <div class="footer">
         邮箱：admin@houyinx.top
     </div>
-</body>
-<script>
-    // 多语言文本定义
-    const texts = {
-        zh: {
-            countdown: "秒后跳转到NextWeb",
-            googleBtn: "NextWeb【推荐】",
-            baiduBtn: "Lobe",
-            footer: "邮箱：admin@houyinx.top",
-            adContent: "捐赠｜Alipay donation"
-        },
-        en: {
-            countdown: "seconds to redirect to NextWeb",
-            googleBtn: "NextWeb 【Recommended】",
-            baiduBtn: "Lobe",
-            footer: "Email: admin@houyinx.top",
-            adContent: "捐赠｜Alipay donation"
+
+    <!-- 覆盖层 -->
+    <div id="overlay" class="overlay">
+        <div class="modal">
+            <p>根据《生成式人工智能服务管理办法》及相关法律法规规定，请您务必在合规范围之内使用本站语言大模型，本站不存储您的任何信息，且不对任何生成结果负有任何责任，请知悉！</p>
+            <button id="acknowledgeButton">同意</button>
+        </div>
+    </div>
+
+    <script>
+        // 多语言文本定义
+        const texts = {
+            zh: {
+                countdown: "秒后跳转到NextWeb",
+                googleBtn: "NextWeb【推荐】",
+                baiduBtn: "Lobe",
+                footer: "邮箱：admin@houyinx.top",
+                adContent: "捐赠｜Alipay donation"
+            },
+            en: {
+                countdown: "seconds to redirect to NextWeb",
+                googleBtn: "NextWeb 【Recommended】",
+                baiduBtn: "Lobe",
+                footer: "Email: admin@houyinx.top",
+                adContent: "捐赠｜Alipay donation"
+            }
+        };
+
+        // 获取元素
+        const h3 = document.querySelector('h3');
+        const googleBtn = document.getElementById('googleBtn');
+        const baiduBtn = document.getElementById('baiduBtn');
+        const footer = document.querySelector('.footer');
+        const langZh = document.getElementById('lang-zh');
+        const langEn = document.getElementById('lang-en');
+        const adContainer = document.querySelector('.ad-container a');
+
+        // 语言切换函数
+        function switchLanguage(lang) {
+            h3.innerHTML = `<span id="countdown">${counter}</span> ${texts[lang].countdown}`;
+            googleBtn.textContent = texts[lang].googleBtn;
+            baiduBtn.textContent = texts[lang].baiduBtn;
+            footer.textContent = texts[lang].footer;
+            adContainer.textContent = texts[lang].adContent;
         }
-    };
 
-    // 获取元素
-    const h3 = document.querySelector('h3');
-    const googleBtn = document.getElementById('googleBtn');
-    const baiduBtn = document.getElementById('baiduBtn');
-    const footer = document.querySelector('.footer');
-    const langZh = document.getElementById('lang-zh');
-    const langEn = document.getElementById('lang-en');
-    const adContainer = document.querySelector('.ad-container a');
+        // 绑定语言切换按钮事件
+        langZh.addEventListener('click', () => switchLanguage('zh'));
+        langEn.addEventListener('click', () => switchLanguage('en'));
 
-    // 语言切换函数
-    function switchLanguage(lang) {
-        h3.innerHTML = `<span id="countdown">${counter}</span> ${texts[lang].countdown}`;
-        googleBtn.textContent = texts[lang].googleBtn;
-        baiduBtn.textContent = texts[lang].baiduBtn;
-        footer.textContent = texts[lang].footer;
-        adContainer.textContent = texts[lang].adContent;
-    }
+        // 倒计时逻辑
+        const span = document.getElementById('countdown');
+        let counter = 5;
+        let timerId;
 
-    // 绑定语言切换按钮事件
-    langZh.addEventListener('click', () => switchLanguage('zh'));
-    langEn.addEventListener('click', () => switchLanguage('en'));
+        function startCountdown() {
+            timerId = setInterval(function() {
+                counter -= 1;
+                if (counter === 0) {
+                    location.href = 'https://aione.houyinx.top';
+                } else {
+                    span.textContent = counter;
+                }
+            }, 1000);
+        }
 
-    // 倒计时逻辑
-    const span = document.getElementById('countdown');
-    let counter = 5;
-    let timerId = setInterval(function() {
-        counter -= 1;
-        if (counter === 0) {
+        // 按钮跳转逻辑
+        baiduBtn.addEventListener('click', () => {
+            clearInterval(timerId);
+            location.href = 'https://aitwo.houyinx.top';
+        });
+
+        googleBtn.addEventListener('click', () => {
+            clearInterval(timerId);
             location.href = 'https://aione.houyinx.top';
-        } else {
-            span.textContent = counter;
-        }
-    }, 1000);
+        });
 
-    // 按钮跳转逻辑
-    baiduBtn.addEventListener('click', () => {
-        clearInterval(timerId);
-        location.href = 'https://aitwo.houyinx.top';
-    });
-
-    googleBtn.addEventListener('click', () => {
-        clearInterval(timerId);
-        location.href = 'https://aione.houyinx.top';
-    });
-</script>
+        // 提示窗口逻辑
+        document.getElementById('acknowledgeButton').addEventListener('click', function() {
+            document.getElementById('overlay').style.display = 'none';
+            startCountdown();
+        });
+    </script>
+</body>
 </html>
