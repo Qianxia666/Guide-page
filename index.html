@@ -3,27 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <title>跳转中…</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
+        body, html {
             margin: 0;
             padding: 0;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .page {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            text-align: center;
+        }
+        .page1 {
             background-color: white;
             color: black;
         }
+        .page2 {
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1535957998253-26ae1ef29506?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+        }
+        .page2 .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1));
+        }
+        .page2 .text {
+            position: absolute;
+            bottom: 20%;
+            left: 10%;
+            color: white;
+        }
+        .page2 .text h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .page2 .text p {
+            margin: 10px 0 0;
+            font-size: 1em;
+        }
         h3 {
-            font-size: 48px; /* 放大标题字体 */
-            margin-bottom: 30px;
+            font-size: 24px;
+            margin-bottom: 20px;
         }
         #rocket {
-            font-size: 144px; /* 放大火箭图标 */
-            margin-bottom: 30px;
+            font-size: 72px;
+            margin-bottom: 20px;
             animation: bounce 2s infinite;
         }
         @keyframes bounce {
@@ -38,12 +71,11 @@
             }
         }
         #countdown {
-            font-size: 144px; /* 放大倒计时数字字体 */
-            color: #007bff; /* 蓝色 */
+            font-size: 72px;
+            color: #007bff;
             font-weight: bold;
-            margin: 30px 0;
-            display: block; /* 将数字显示为块级元素 */
-            margin: 0 auto; /* 水平居中 */
+            margin: 20px 0;
+            display: block;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
             animation: pulse 1s infinite;
         }
@@ -61,16 +93,16 @@
         .button-container {
             display: flex;
             justify-content: center;
-            gap: 30px; /* 按钮之间的间距 */
+            gap: 20px;
         }
         button {
-            padding: 25px 50px; /* 增大按钮的内边距 */
-            font-size: 32px; /* 增大按钮字体 */
+            padding: 15px 30px;
+            font-size: 16px;
             cursor: pointer;
             background-color: #007bff;
             color: white;
             border: none;
-            border-radius: 25px;
+            border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: background-color 0.3s, transform 0.3s;
         }
@@ -79,11 +111,11 @@
             transform: translateY(-2px);
         }
         .ad-container {
-            margin-top: 30px;
-            width: 600px;
-            height: 200px;
+            margin-top: 20px;
+            width: 300px;
+            height: 100px;
             border: 2px dashed #007bff;
-            border-radius: 15px;
+            border-radius: 10px;
             background-color: white;
             display: flex;
             justify-content: center;
@@ -91,8 +123,8 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .ad-container a {
-            font-size: 30px; /* 广告文字字体 */
-            color: black; /* 黑色字体 */
+            font-size: 16px;
+            color: black;
             text-decoration: none;
         }
         .ad-container a:hover {
@@ -100,17 +132,17 @@
         }
         .footer {
             position: absolute;
-            bottom: 30px;
+            bottom: 20px;
             width: 100%;
             text-align: center;
-            font-size: 24px; /* 增大底部文字字体 */
+            font-size: 12px;
             color: gray;
         }
         .language-switch {
             position: absolute;
             top: 20px;
             right: 20px;
-            font-size: 18px;
+            font-size: 12px;
             font-weight: bold;
             color: gray;
         }
@@ -121,8 +153,7 @@
         .language-switch span:hover {
             color: black;
         }
-        /* 覆盖层样式 */
-        .overlay {
+        .overlay-modal {
             position: fixed;
             top: 0;
             left: 0;
@@ -136,20 +167,20 @@
         }
         .modal {
             background: white;
-            padding: 50px; /* 增大内边距 */
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
-            max-width: 600px; /* 增大最大宽度 */
+            max-width: 600px;
             width: 90%;
         }
         .modal p {
-            font-size: 25px;
+            font-size: 16px;
             margin-bottom: 20px;
         }
         .modal button {
             padding: 10px 20px;
-            font-size: 22px;
+            font-size: 14px;
             cursor: pointer;
             background-color: #007bff;
             color: white;
@@ -163,24 +194,31 @@
     </style>
 </head>
 <body>
-    <div class="language-switch">
-        <span id="lang-zh">中文</span> ｜<span id="lang-en">English</span>
+    <div class="page page1">
+        <div class="language-switch">
+            <span id="lang-zh">中文</span> ｜<span id="lang-en">English</span>
+        </div>
+        <div id="rocket">🚀</div>
+        <h3><span id="countdown">5</span> 秒后跳转到NextWeb</h3>
+        <div class="button-container">
+            <button id="googleBtn">NextWeb【推荐】</button>
+            <button id="baiduBtn">Lobe</button>
+        </div>
+        <div class="ad-container">
+            <a href="https://qr.alipay.com/fkx16480lgnw1yqksezmab7" target="_blank">捐赠｜Alipay donation</a>
+        </div>
+        <div class="footer">
+            如果您想了解我们的更多消息，请悄悄向下滑动屏幕🤫
+        </div>
     </div>
-    <div id="rocket">🚀</div>
-    <h3><span id="countdown">5</span> 秒后跳转到NextWeb</h3>
-    <div class="button-container">
-        <button id="googleBtn">NextWeb【推荐】</button>
-        <button id="baiduBtn">Lobe</button>
+    <div class="page page2">
+        <div class="overlay"></div>
+        <div class="text">
+            <h1>让AIGC<br>为您的梦想如虎添翼！</h1>
+            <p>Let AIGC give wings to your dreams.</p>
+        </div>
     </div>
-    <div class="ad-container">
-        <a href="https://qr.alipay.com/fkx16480lgnw1yqksezmab7" target="_blank">捐赠｜Alipay donation</a>
-    </div>
-    <div class="footer">
-        邮箱：admin@houyinx.top
-    </div>
-
-    <!-- 覆盖层 -->
-    <div id="overlay" class="overlay">
+    <div id="overlay" class="overlay-modal">
         <div class="modal">
             <p>根据《生成式人工智能服务管理办法》及相关法律法规规定，请您务必在合规范围之内使用本站语言大模型，本站不存储您的任何信息，且不对任何生成结果负有任何责任，请知悉！</p>
             <button id="acknowledgeButton">同意</button>
@@ -188,7 +226,6 @@
     </div>
 
     <script>
-        // 多语言文本定义
         const texts = {
             zh: {
                 countdown: "秒后跳转到NextWeb",
@@ -206,7 +243,6 @@
             }
         };
 
-        // 获取元素
         const h3 = document.querySelector('h3');
         const googleBtn = document.getElementById('googleBtn');
         const baiduBtn = document.getElementById('baiduBtn');
@@ -215,7 +251,6 @@
         const langEn = document.getElementById('lang-en');
         const adContainer = document.querySelector('.ad-container a');
 
-        // 语言切换函数
         function switchLanguage(lang) {
             h3.innerHTML = `<span id="countdown">${counter}</span> ${texts[lang].countdown}`;
             googleBtn.textContent = texts[lang].googleBtn;
@@ -224,11 +259,9 @@
             adContainer.textContent = texts[lang].adContent;
         }
 
-        // 绑定语言切换按钮事件
         langZh.addEventListener('click', () => switchLanguage('zh'));
         langEn.addEventListener('click', () => switchLanguage('en'));
 
-        // 倒计时逻辑
         const span = document.getElementById('countdown');
         let counter = 5;
         let timerId;
@@ -244,7 +277,6 @@
             }, 1000);
         }
 
-        // 按钮跳转逻辑
         baiduBtn.addEventListener('click', () => {
             clearInterval(timerId);
             location.href = 'https://aitwo.houyinx.top';
@@ -255,7 +287,6 @@
             location.href = 'https://aione.houyinx.top';
         });
 
-        // 提示窗口逻辑
         document.getElementById('acknowledgeButton').addEventListener('click', function() {
             document.getElementById('overlay').style.display = 'none';
             startCountdown();
