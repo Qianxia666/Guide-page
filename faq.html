@@ -42,6 +42,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #e0e0e0;
         }
 
         .faq-answer {
@@ -49,6 +54,14 @@
             background: #f9f9f9;
             padding: 15px;
             border-radius: 8px;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
         }
     </style>
 </head>
@@ -78,10 +91,21 @@
     <script>
         function toggleAnswer(element) {
             var answer = element.nextElementSibling;
-            if (answer.style.display === "none") {
-                answer.style.display = "block";
-            } else {
-                answer.style.display = "none";
+            var isActive = element.classList.contains('active');
+
+            // Close all answers
+            document.querySelectorAll('.faq-answer').forEach(function(ans) {
+                ans.style.display = 'none';
+            });
+
+            document.querySelectorAll('.faq-question').forEach(function(question) {
+                question.classList.remove('active');
+            });
+
+            // Open the clicked answer if it was not active
+            if (!isActive) {
+                answer.style.display = 'block';
+                element.classList.add('active');
             }
         }
     </script>
