@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网站导航</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f6f8fc, #e9ecef);
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #007BFF;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-around;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            background-color: #0056b3;
+        }
+
+        .container {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #333;
+        }
+
+        .header p {
+            color: #666;
+            margin: 10px 0 30px;
+            font-size: 1.2em;
+        }
+
+        .link-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .link-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s, transform 0.3s;
+            flex: 1 1 calc(30% - 20px);
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .link-item:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .link-item a {
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 1.2em;
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .link-item a:hover {
+            color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .link-item {
+                flex: 1 1 calc(45% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .navbar a {
+                width: 100%;
+                text-align: left;
+                padding: 10px;
+            }
+
+            .link-item {
+                flex: 1 1 calc(100% - 20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="http://web.houyinx.top/">首页</a>
+        <a href="mailto:admin@houyinx.top">邮箱</a>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>网站导航</h1>
+            <p>点击下方的链接访问相关站点</p>
+        </div>
+        <div class="link-container">
+            <div class="link-item">
+                <a href="https://gpt.houyinx.top/ai.html" target="_blank">AIGC</a>
+            </div>
+            <div class="link-item">
+                <a href="https://gpt.houyinx.top/bilibili.html" target="_blank">Bilibili海外解锁</a>
+            </div>
+            <!-- 可以根据需要添加更多站点 -->
+        </div>
+    </div>
+</body>
+</html>
