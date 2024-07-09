@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BiliRoaming Service</title>
+  <link rel="stylesheet" href="/_next/static/css/58d046d9632bea54.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    h1, h2, h3 {
+      color: #333;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 700;
+      margin-top: 1.5em;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 0.5em;
+    }
+    h2 {
+      font-size: 1.5em;
+    }
+    h3 {
+      font-size: 1.2em;
+    }
+    p {
+      line-height: 1.6;
+      margin-bottom: 1em;
+    }
+    a {
+      color: #007BFF;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    a:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+    .footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 0.9em;
+      color: #6c757d;
+    }
+    .code {
+      background-color: #e9ecef;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', Courier, monospace;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+      }
+      h1 {
+        font-size: 1.5em;
+      }
+      h2 {
+        font-size: 1.2em;
+      }
+      h3 {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>BiliRoaming Service</h1>
+    <h2>信息展示</h2>
+    <p>解锁区域: <strong>
+    <a target="_blank" href=" ">SG</a > &nbsp
+    <a target="_blank" href="https://bilibilihk.houyinx.top">HK</a ></strong></p >
+    <p><strong>Tips：点击链接可切换地域，功能区可查询当前地域</strong></p >
+    <p>当前后端版本: <strong>3.3.2 [3c76bf9]</strong></p >
+    <p>哔哩漫游最低版本限制: <strong>1290</strong> [<a target="_blank" href="https://github.com/bili-vd-bak/biliroaming-ts-server-vercel/wiki/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6#%E9%99%90%E5%88%B6api%E8%B0%83%E7%94%A8">对应版本号查询</a >]</p >
+    
+    <h2>功能区</h2>
+    <p><a target="_blank" href="/api/server_info">服务器网络信息</a >&emsp;
+    <a target="_blank" href="https://github.com/yujincheng08/BiliRoaming/wiki/">使用教程</a ></p >
+    
+    <h2>小工具</h2>
+    <p>填写以下内容时，请使用你自己的信息，且将<code class="code">{}</code>中的内容(包括花括号)替换为要求的内容。</p >
+    
+    <h3>Cookies转Access_key</h3>
+    <p>(详情自行搜索) 在<code class="code">bilibili.com</code>打开 console(控制台) ,输入 <code class="code">document.cookie</code> 即可获取当前的Cookies。</p >
+    <p>访问 <code class="code">/api/tools/cookies2accesskey?cookies={cookies}</code> 即可生成<code class="code">access_key</code>。</p >
+    <p>若您需解决WEB(网页)端无法授权大会员的问题，请在 console 输入 <code class="code">localStorage.access_key = '{access_key}'</code></p >
+    
+    <h3>Access_key获取账户信息</h3>
+    <p>访问 <code class="code">/api/tools/my_info?access_key={access_key}</code> 即可</p >
+    
+    <h3>使用BBDown下载</h3>
+    <p>获取<code class="code">accesskey</code>(手机客户端),手动在BBDown的登录数据<code class="code">BBDown.data</code>文件后加上<code class="code">;access_key={accesskey}</code>,此后即可正常使用该服务。</p >
+    
+    <h3>支持黑/白名单查询</h3>
+    <p>访问 <code class="code">/api/users/{uid}</code> 即可查询</p >
+    
+    <h2>反馈</h2>
+    <p>Email: admin@houyinx.top</p >
+    <footer class="footer">
+      <p><a target="_blank" href="https://github.com/bili-vd-bak/biliroaming-serve-ts-vercel">在Github上查看本项目</a ></p >
+    </footer>
+  </div>
+</body>
+</html>
