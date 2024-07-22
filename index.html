@@ -5,135 +5,159 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>网站导航</title>
     <style>
+        :root {
+            --primary-color: #007BFF;
+            --primary-hover-color: #0056b3;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --text-muted: #6c757d;
+            --link-color: #007BFF;
+            --link-hover-color: #0056b3;
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --border-radius: 10px;
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #f6f8fc, #e9ecef);
-            color: #333;
-        }
-
-        .navbar {
-            background-color: #007BFF;
-            padding: 15px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-around;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .navbar a {
-            color: #fff;
-            text-align: center;
-            padding: 14px 20px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .navbar a:hover {
-            background-color: #0056b3;
+            background-color: var(--background-color);
+            color: var(--text-color);
         }
 
         .container {
-            padding: 40px 20px;
-            max-width: 1200px;
-            margin: auto;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
+        h1, h2, h3 {
+            color: var(--text-color);
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 700;
+            margin-top: 1.5em;
         }
 
-        .header h1 {
-            font-size: 3em;
-            margin: 0;
-            color: #333;
+        h1 {
+            font-size: 2em;
+            margin-bottom: 0.5em;
         }
 
-        .header p {
-            color: #666;
-            margin: 10px 0 30px;
+        h2 {
+            font-size: 1.5em;
+        }
+
+        h3 {
             font-size: 1.2em;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 1em;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: var(--link-hover-color);
+            text-decoration: underline;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+
+        .code {
+            background-color: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
         }
 
         .link-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: center;
+            gap: 20px;
         }
 
         .link-item {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 10px;
+            background-color: #fff; /* 链接项背景色为白色 */
+            border: none; /* 去掉边框 */
+            border-radius: var(--border-radius);
             padding: 20px;
-            margin: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: calc(33% - 40px);
+            box-shadow: var(--box-shadow);
             transition: box-shadow 0.3s, transform 0.3s;
-            flex: 1 1 calc(30% - 20px);
-            box-sizing: border-box;
             text-align: center;
+            box-sizing: border-box;
         }
 
         .link-item:hover {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             transform: translateY(-5px);
         }
 
         .link-item a {
             text-decoration: none;
-            color: #007BFF;
+            color: var(--link-color);
             font-size: 1.2em;
             display: block;
             margin-top: 10px;
             font-weight: bold;
+            transition: color 0.3s;
         }
 
         .link-item a:hover {
-            color: #0056b3;
+            color: var(--link-hover-color);
         }
 
         @media (max-width: 768px) {
             .link-item {
-                flex: 1 1 calc(45% - 20px);
+                width: calc(45% - 40px);
             }
         }
 
-        @media (max-width: 480px) {
-            .navbar {
-                flex-direction: column;
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
             }
 
-            .navbar a {
-                width: 100%;
-                text-align: left;
-                padding: 10px;
+            h1 {
+                font-size: 1.5em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+
+            h3 {
+                font-size: 1em;
             }
 
             .link-item {
-                flex: 1 1 calc(100% - 20px);
+                width: calc(100% - 40px);
             }
         }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <a href="http://web.996898.xyz/">首页</a>
-        <a href="mailto:admin@996898.top">邮箱</a>
-    </div>
-
     <div class="container">
-        <div class="header">
-            <h1>网站导航</h1>
-            <p>点击下方的链接访问相关站点</p>
-        </div>
+        <h1>网站导航</h1>
+        <p>点击下方的链接访问相关站点：</p>
         <div class="link-container">
             <div class="link-item">
-                <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=​Mzk0MjY3MTA3OA==&scene=124#wechat_redirect
-​" target="_blank">公众号</a>
+                <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzk0MjY3MTA3OA==&scene=124#wechat_redirect" target="_blank">公众号</a>
             </div>
             <div class="link-item">
                 <a href="https://web.996898.xyz/ai.html" target="_blank">AIGC</a>
@@ -147,8 +171,11 @@
             <div class="link-item">
                 <a href="https://s0zjiuzgd8.feishu.cn/docx/BGHudEZMzoO7IExBRWNcbAzynZd" target="_blank">个人收藏站点</a>
             </div>
-            <!-- 可以根据需要添加更多站点 -->
         </div>
+        <footer class="footer">
+            <br></br>
+            <p>Email: admin@996898.xyz</p>
+        </footer>
     </div>
 </body>
 </html>
