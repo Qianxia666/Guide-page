@@ -59,6 +59,11 @@
             background-color: #004494;
             transform: translateY(-5px);
         }
+
+        .disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -95,9 +100,26 @@
     <p>本站不存储您的任何信息，且对生成结果不承担任何责任。本站只为海外华人提供服务，中国大陆及港澳地区用户因政策问题禁止使用，如执意继续使用所造成的一切问题由使用者全权承担，感谢您的理解与支持！</p>
 </div>
 
-<button class="floating-button" onclick="window.location.href='https://web.996898.xyz/ai.html';">
+<button class="floating-button" id="agreeButton" onclick="window.location.href='https://web.996898.xyz/ai.html';">
     我已阅读并同意该条款
 </button>
+
+<script>
+    const button = document.getElementById('agreeButton');
+    let waitTime = 3; // 等待时间
+    button.classList.add('disabled'); // 初始按钮为禁用状态
+    button.textContent = `请等待 ${waitTime} 秒`;
+
+    const countdown = setInterval(() => {
+        waitTime--;
+        button.textContent = `请等待 ${waitTime} 秒`;
+        if (waitTime <= 0) {
+            clearInterval(countdown);
+            button.classList.remove('disabled'); // 启用按钮
+            button.textContent = '我已阅读并同意该条款'; // 恢复按钮文本
+        }
+    }, 1000);
+</script>
 
 </body>
 </html>
