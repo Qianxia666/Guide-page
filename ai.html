@@ -89,44 +89,6 @@
             font-size: 12px;
             color: gray;
         }
-        .overlay-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .modal {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            max-width: 600px;
-            width: 90%;
-        }
-        .modal p {
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
-        .modal button {
-            padding: 10px 20px;
-            font-size: 14px;
-            cursor: pointer;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        .modal button:hover {
-            background-color: #0056b3;
-        }
     </style>
 </head>
 <body>
@@ -139,12 +101,6 @@
         </div>
         <div class="footer">
             如果您想了解更多信息或申请测试资格，请<a href="https://web.996898.xyz/faq.html">点击此处</a>
-        </div>
-    </div>
-    <div id="overlay" class="overlay-modal">
-        <div class="modal">
-            <p>根据归属地相关法律法规，请您务必在合规范围内使用本站的语言大模型。本站不存储您的任何信息，且对生成结果不承担任何责任。<strong>本站只为海外华人提供服务，中国大陆及港澳地区用户因政策问题禁止使用，如执意继续使用所造成的一切问题由使用者全权承担，感谢您的理解与支持！</strong></p>
-            <button id="acknowledgeButton">同意</button>
         </div>
     </div>
 
@@ -174,10 +130,8 @@
             location.href = 'https://ai2.996898.xyz';
         });
 
-        document.getElementById('acknowledgeButton').addEventListener('click', function() {
-            document.getElementById('overlay').style.display = 'none';
-            startCountdown();
-        });
+        // 直接启动倒计时
+        startCountdown();
     </script>
 </body>
 </html>
