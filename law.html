@@ -64,14 +64,24 @@
             background-color: #ccc;
             cursor: not-allowed;
         }
+
+        #statusMessage {
+            text-align: center;
+            margin-top: 20px;
+            color: green;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
+<div class="container" id="agreementContainer">
     <h1>使用协议</h1>
     <p>在使用本网站之前，请仔细阅读以下条款。继续使用本网站即表示您同意遵守这些条款。</p>
 
+    <h2>0. 重要通知</h2>
+    <p><b>当您在浏览器内同意过该条款但本条款再次出现时，说明本网站的开放模型或条款有重大更新，建议您前往<a href="https://web.996898.xyz/faq.html">FAQ页面</a>或倒计时页末蓝色链接查看详情，感谢您的理解与支持。</b></p>
+    
     <h2>1. 使用条款</h2>
     <p>本网站提供的服务和内容仅供合法目的使用。用户不得利用本网站进行任何违反当地法律法规的活动。</p>
 
@@ -100,25 +110,57 @@
     <p>本站不存储您的任何信息，且对生成结果不承担任何责任。本站只为海外华人提供服务，中国大陆及港澳地区用户因政策问题禁止使用，如执意继续使用所造成的一切问题由使用者全权承担，感谢您的理解与支持！</p>
 </div>
 
-<button class="floating-button" id="agreeButton" onclick="window.location.href='https://web.996898.xyz/ai.html';">
+<button class="floating-button" id="agreeButton" onclick="agreeTerms()">
     我已阅读并同意该条款
 </button>
 
-<script>
-    const button = document.getElementById('agreeButton');
-    let waitTime = 3; // 等待时间
-    button.classList.add('disabled'); // 初始按钮为禁用状态
-    button.textContent = `请等待 ${waitTime} 秒`;
+<div id="statusMessage"></div>
 
-    const countdown = setInterval(() => {
-        waitTime--;
+<script>
+    const agreementContainer = document.getElementById('agreementContainer');
+    const button = document.getElementById('agreeButton');
+    const statusMessage = document.getElementById('statusMessage');
+
+    const currentVersion = '1.01'; // 当前协议版本
+
+    // 检查用户是否已经同意条款
+    const storedVersion = localStorage.getItem('agreementVersion');
+    const hasAgreed = localStorage.getItem('hasAgreed') === 'true';
+
+    if (hasAgreed && storedVersion === currentVersion) {
+        // 显示同意状态信息
+        statusMessage.textContent = '您已同意使用条款，正在跳转中...';
+        agreementContainer.style.display = 'none'; // 隐藏协议内容
+        button.style.display = 'none'; // 隐藏按钮
+        // 直接跳转到指定页面
+        window.location.href = 'https://web.996898.xyz/ai.html';
+    } else {
+        // 如果没有同意，显示协议内容
+        let waitTime = 10; // 等待时间
+        button.classList.add('disabled'); // 初始按钮为禁用状态
         button.textContent = `请等待 ${waitTime} 秒`;
-        if (waitTime <= 0) {
-            clearInterval(countdown);
-            button.classList.remove('disabled'); // 启用按钮
-            button.textContent = '我已阅读并同意该条款'; // 恢复按钮文本
-        }
-    }, 1000);
+
+        const countdown = setInterval(() => {
+            waitTime--;
+            button.textContent = `请等待 ${waitTime} 秒`;
+            if (waitTime <= 0) {
+                clearInterval(countdown);
+                button.classList.remove('disabled'); // 启用按钮
+                button.textContent = '我已阅读并同意该条款'; // 恢复按钮文本
+            }
+        }, 1000);
+    }
+
+    function agreeTerms() {
+        if (button.classList.contains('disabled')) return; // 如果按钮被禁用，直接返回
+        localStorage.setItem('hasAgreed', 'true'); // 设置用户同意状态
+        localStorage.setItem('agreementVersion', currentVersion); // 存储协议版本
+        statusMessage.textContent = '您已同意使用协议。'; // 显示同意状态信息
+        agreementContainer.style.display = 'none'; // 隐藏协议内容
+        button.style.display = 'none'; // 隐藏按钮
+        // 跳转到指定页面
+        window.location.href = 'https://web.996898.xyz/ai.html';
+    }
 </script>
 
 </body>
