@@ -11,6 +11,7 @@
             height: 100%;
             font-family: 'Arial', sans-serif;
             scroll-behavior: smooth;
+            background-color: #ffffff; /* 设置为纯白色 */
         }
         .page {
             height: 100vh;
@@ -19,36 +20,6 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-        }
-        .page1 {
-            background-color: white;
-            color: black;
-        }
-        .page2 {
-            position: relative;
-            background: url('https://images.unsplash.com/photo-1535957998253-26ae1ef29506?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
-        }
-        .page2 .overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1));
-        }
-        .page2 .text {
-            position: absolute;
-            bottom: 20%;
-            left: 10%;
-            color: white;
-        }
-        .page2 .text h1 {
-            margin: 0;
-            font-size: 2em;
-        }
-        .page2 .text p {
-            margin: 10px 0 0;
-            font-size: 1em;
         }
         h3 {
             font-size: 24px;
@@ -110,26 +81,6 @@
             background-color: #0056b3;
             transform: translateY(-2px);
         }
-        .ad-container {
-            margin-top: 20px;
-            width: 300px;
-            height: 100px;
-            border: 2px dashed #007bff;
-            border-radius: 10px;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .ad-container a {
-            font-size: 16px;
-            color: black;
-            text-decoration: none;
-        }
-        .ad-container a:hover {
-            text-decoration: underline;
-        }
         .footer {
             position: absolute;
             bottom: 20px;
@@ -137,21 +88,6 @@
             text-align: center;
             font-size: 12px;
             color: gray;
-        }
-        .language-switch {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            color: gray;
-        }
-        .language-switch span {
-            cursor: pointer;
-            margin-left: 10px;
-        }
-        .language-switch span:hover {
-            color: black;
         }
         .overlay-modal {
             position: fixed;
@@ -191,78 +127,18 @@
         .modal button:hover {
             background-color: #0056b3;
         }
-        /* 新代码样式 */
-        .container {
-            max-width: 2000px;
-            margin: 20px auto;
-            background: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            position: absolute;
-            top: 10%;
-
-        }
-        .container h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .faq-item {
-            border-top: 1px solid #eee;
-            padding: 15px 0;
-        }
-        .faq-item:first-child {
-            border-top: none;
-        }
-        .faq-question {
-            font-size: 18px;
-            color: #333;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .faq-answer {
-            margin-top: 10px;
-            display: none;
-            font-size: 16px;
-            color: #666;
-        }
-        .faq-answer.active {
-            display: block;
-        }
-        .faq-question i {
-            transition: transform 0.3s;
-        }
-        .faq-question i.rotate {
-            transform: rotate(180deg);
-        }
     </style>
 </head>
 <body>
-    <div class="page page1">
-        <div class="language-switch">
-            <span id="lang-zh">Chinese</span><span id="lang-en">English</span>
-        </div>
+    <div class="page">
         <div id="rocket">🚀</div>
         <h3><span id="countdown">5</span> 秒后跳转到NextWeb</h3>
         <div class="button-container">
             <button id="googleBtn">NextWeb</button>
             <button id="baiduBtn">Lobe</button>
         </div>
-        <div class="ad-container">
-            <a href="https://qr.alipay.com/fkx16480lgnw1yqksezmab7" target="_blank">捐赠｜Alipay donation</a>
-        </div>
         <div class="footer">
             如果您想了解更多信息或申请测试资格，请<a href="https://web.996898.xyz/faq.html">点击此处</a>
-        </div>
-    </div>
-    <div class="page page2">
-        <div class="overlay"></div>
-
-        <!-- 新代码结束 -->
-        <div class="text">
-            <h1>让AIGC<br>为您的梦想如虎添翼！</h1>
-            <p>Let AIGC give wings to your dreams.</p>
         </div>
     </div>
     <div id="overlay" class="overlay-modal">
@@ -273,42 +149,6 @@
     </div>
 
     <script>
-        const texts = {
-            zh: {
-                countdown: "秒后跳转到NextWeb",
-                googleBtn: "NextWeb",
-                baiduBtn: "Lobe",
-                footer: "邮箱：admin@996898.xyz",
-                adContent: "捐赠｜Alipay donation"
-            },
-            en: {
-                countdown: "seconds to redirect to NextWeb",
-                googleBtn: "NextWeb",
-                baiduBtn: "Lobe",
-                footer: "Email: admin@996898.xyz",
-                adContent: "捐赠｜Alipay donation"
-            }
-        };
-
-        const h3 = document.querySelector('h3');
-        const googleBtn = document.getElementById('googleBtn');
-        const baiduBtn = document.getElementById('baiduBtn');
-        const footer = document.querySelector('.footer');
-        const langZh = document.getElementById('lang-zh');
-        const langEn = document.getElementById('lang-en');
-        const adContainer = document.querySelector('.ad-container a');
-
-        function switchLanguage(lang) {
-            h3.innerHTML = `<span id="countdown">${counter}</span> ${texts[lang].countdown}`;
-            googleBtn.textContent = texts[lang].googleBtn;
-            baiduBtn.textContent = texts[lang].baiduBtn;
-            footer.textContent = texts[lang].footer;
-            adContainer.textContent = texts[lang].adContent;
-        }
-
-        langZh.addEventListener('click', () => switchLanguage('zh'));
-        langEn.addEventListener('click', () => switchLanguage('en'));
-
         const span = document.getElementById('countdown');
         let counter = 5;
         let timerId;
@@ -324,30 +164,20 @@
             }, 1000);
         }
 
-        baiduBtn.addEventListener('click', () => {
-            clearInterval(timerId);
-            location.href = 'https://ai2.996898.xyz';
-        });
-
-        googleBtn.addEventListener('click', () => {
+        document.getElementById('googleBtn').addEventListener('click', () => {
             clearInterval(timerId);
             location.href = 'https://ai1.996898.xyz';
+        });
+
+        document.getElementById('baiduBtn').addEventListener('click', () => {
+            clearInterval(timerId);
+            location.href = 'https://ai2.996898.xyz';
         });
 
         document.getElementById('acknowledgeButton').addEventListener('click', function() {
             document.getElementById('overlay').style.display = 'none';
             startCountdown();
         });
-
-        // 新代码脚本
-        function toggleAnswer(element) {
-            const answer = element.nextElementSibling;
-            const icon = element.querySelector('i');
-            if (answer) {
-                answer.classList.toggle('active');
-                icon.classList.toggle('rotate');
-            }
-        }
     </script>
 </body>
 </html>
