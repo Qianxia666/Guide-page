@@ -71,18 +71,32 @@
             color: green;
             font-weight: bold;
         }
+
+        .version-info {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
 
 <div class="container" id="agreementContainer">
     <h1>使用协议</h1>
+    
+    <div class="version-info">
+        <p>服务器协议版本: <strong id="currentVersion"></strong></p>
+        <p>本地协议版本: <strong id="storedVersion"></strong></p>
+        <p>更新内容速览：开放模型更新，协议内容更新</p>
+    </div>
+
     <p>在使用本网站之前，请仔细阅读以下条款。继续使用本网站即表示您同意遵守这些条款。</p>
 
     <h2>0. 重要通知</h2>
     <p><b>当您在浏览器内同意过该条款但本条款再次出现时，说明本网站的开放模型或条款有重大更新，建议您前往<a href="https://web.996898.xyz/faq.html">FAQ页面</a>或倒计时页末蓝色链接查看详情，感谢您的理解与支持。</b></p>
     
-    <h2>1. 使用条款</h2>
+    <h2>1. 使用协议</h2>
     <p>本网站提供的服务和内容仅供合法目的使用。用户不得利用本网站进行任何违反当地法律法规的活动。</p>
 
     <h2>2. 隐私政策</h2>
@@ -117,15 +131,22 @@
 <div id="statusMessage"></div>
 
 <script>
+    const currentVersion = 'V1.0 Beta1'; // 当前协议版本
     const agreementContainer = document.getElementById('agreementContainer');
     const button = document.getElementById('agreeButton');
     const statusMessage = document.getElementById('statusMessage');
+    const storedVersionElement = document.getElementById('storedVersion');
+    const currentVersionElement = document.getElementById('currentVersion');
 
-    const currentVersion = '1.01'; // 当前协议版本
+    // 显示当前协议版本
+    currentVersionElement.textContent = currentVersion;
 
     // 检查用户是否已经同意条款
     const storedVersion = localStorage.getItem('agreementVersion');
     const hasAgreed = localStorage.getItem('hasAgreed') === 'true';
+
+    // 显示用户已经同意的协议版本
+    storedVersionElement.textContent = storedVersion ? storedVersion : '尚未同意过条款';
 
     if (hasAgreed && storedVersion === currentVersion) {
         // 显示同意状态信息
