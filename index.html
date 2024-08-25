@@ -1,181 +1,218 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>网站导航</title>
     <style>
-        :root {
-            --primary-color: #007BFF;
-            --primary-hover-color: #0056b3;
-            --background-color: #f8f9fa;
-            --text-color: #333;
-            --text-muted: #6c757d;
-            --link-color: #007BFF;
-            --link-hover-color: #0056b3;
-            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            --border-radius: 10px;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f9fc;
             margin: 0;
             padding: 0;
-            background-color: var(--background-color);
-            color: var(--text-color);
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: var(--box-shadow);
-            border-radius: var(--border-radius);
-        }
-
-        h1, h2, h3 {
-            color: var(--text-color);
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            font-weight: 700;
-            margin-top: 1.5em;
-        }
-
-        h1 {
-            font-size: 2em;
-            margin-bottom: 0.5em;
-        }
-
-        h2 {
-            font-size: 1.5em;
-        }
-
-        h3 {
-            font-size: 1.2em;
-        }
-
-        p {
-            line-height: 1.6;
-            margin-bottom: 1em;
-        }
-
-        a {
-            color: var(--link-color);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        a:hover {
-            color: var(--link-hover-color);
-            text-decoration: underline;
-        }
-
-        .footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 0.9em;
-            color: var(--text-muted);
-        }
-
-        .code {
-            background-color: #e9ecef;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        .link-container {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
         }
-
-        .link-item {
-            background-color: #fff; /* 链接项背景色为白色 */
-            border: none; /* 去掉边框 */
-            border-radius: var(--border-radius);
-            padding: 20px;
-            width: calc(33% - 40px);
-            box-shadow: var(--box-shadow);
-            transition: box-shadow 0.3s, transform 0.3s;
-            text-align: center;
-            box-sizing: border-box;
+        header {
+            width: 100%;
+            background-color: #2E4B2D;
+            padding: 15px 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
         }
-
-        .link-item:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            transform: translateY(-5px);
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-
-        .link-item a {
+        nav h1 {
+            color: #ffffff;
+            margin: 0;
+            font-size: 1.8em;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 30px;
+        }
+        nav ul li a {
+            color: #ffffff;
             text-decoration: none;
-            color: var(--link-color);
-            font-size: 1.2em;
-            display: block;
-            margin-top: 10px;
             font-weight: bold;
             transition: color 0.3s;
         }
-
-        .link-item a:hover {
-            color: var(--link-hover-color);
+        nav ul li a:hover {
+            color: #D4B600;
         }
-
-        @media (max-width: 768px) {
-            .link-item {
-                width: calc(45% - 40px);
-            }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+            margin-top: 80px;
         }
-
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            color: white;
+            text-decoration: none; /* 移除链接下划线 */
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        .card:nth-child(1) {
+            background-color: #2E4B2D;
+        }
+        .card:nth-child(2) {
+            background-color: #4E6E8D;
+        }
+        .card:nth-child(3) {
+            background-color: #EED045;
+        }
+        .card:nth-child(4) {
+            background-color: #A77BCA;
+        }
+        .card:nth-child(5) {
+            background-color: #EE4866;
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .profile-info .name {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .profile-info .status {
+            font-size: 0.9em;
+            color: #b0bec5;
+        }
+        .quote {
+            font-size: 6em;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            opacity: 0.1;
+            font-family: 'Georgia', serif;
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+        .card p {
+            margin: 10px 0;
+            line-height: 1.6;
+            font-size: 1em;
+        }
         @media (max-width: 600px) {
-            .container {
+            .quote {
+                font-size: 4em;
+            }
+            .profile-info .name {
+                font-size: 1.1em;
+            }
+            .card p {
+                font-size: 1.1em;
+                line-height: 1.8;
+            }
+            .card {
                 padding: 15px;
             }
-
-            h1 {
-                font-size: 1.5em;
-            }
-
-            h2 {
-                font-size: 1.2em;
-            }
-
-            h3 {
-                font-size: 1em;
-            }
-
-            .link-item {
-                width: calc(100% - 40px);
+        }
+        @media (max-width: 400px) {
+            .card {
+                padding: 10px;
             }
         }
     </style>
 </head>
 <body>
+    <header>
+        <nav>
+            <h1>网站导航</h1>
+        </nav>
+    </header>
     <div class="container">
-        <h1>网站导航</h1>
-        <p>点击下方的链接访问相关站点：</p>
-        <div class="link-container">
-            <div class="link-item">
-                <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzk0MjY3MTA3OA==&scene=124#wechat_redirect" target="_blank">公众号</a>
+        <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzk0MjY3MTA3OA==&scene=124#wechat_redirect" class="card">
+            <div class="profile">
+                <div class="profile-info">
+                    <div class="name">公众号</div>
+                    <div class="status">https://mp.weixin.qq.com</div>
+                </div>
             </div>
-            <div class="link-item">
-                <a href="https://web.996898.xyz/law.html" target="_blank">ChatGPT</a>
+            <div class="quote">“</div>
+            <div class="content">
+                <p>还没想好写什么</p>
             </div>
-            <div class="link-item">
-                <a href="https://web.996898.xyz/bilibili.html" target="_blank">Bilibili海外解锁</a>
+        </a>
+        <a href="https://web.996898.xyz/law.html" class="card">
+            <div class="profile">
+                <div class="profile-info">
+                    <div class="name">ChatGPT</div>
+                    <div class="status">https://web.996898.xyz/law.html</div>
+                </div>
             </div>
-            <div class="link-item">
-                <a href="https://rss.996898.xyz/" target="_blank">RSSHub</a>
+            <div class="quote">“</div>
+            <div class="content">
+                <p>还没想好写什么</p>
             </div>
-            <div class="link-item">
-                <a href="https://s0zjiuzgd8.feishu.cn/docx/BGHudEZMzoO7IExBRWNcbAzynZd" target="_blank">个人收藏站点</a>
+        </a>
+        <a href="https://web.996898.xyz/bilibili.html" class="card">
+            <div class="profile">
+                <div class="profile-info">
+                    <div class="name">Bilibili海外解锁</div>
+                    <div class="status">https://web.996898.xyz/bilibili.html</div>
+                </div>
             </div>
-        </div>
-        <footer class="footer">
-            <br></br>
-            <p>Email: admin@996898.xyz</p>
-        </footer>
+            <div class="quote">“</div>
+            <div class="content">
+                <p>还没想好写什么</p>
+            </div>
+        </a>
+        <a href="https://rss.996898.xyz/" class="card">
+            <div class="profile">
+                <div class="profile-info">
+                    <div class="name">RSS</div>
+                    <div class="status">https://rss.996898.xyz/</div>
+                </div>
+            </div>
+            <div class="quote">“</div>
+            <div class="content">
+                <p>还没想好写什么</p>
+            </div>
+        </a>
+        <a href="https://s0zjiuzgd8.feishu.cn/docx/BGHudEZMzoO7IExBRWNcbAzynZd" class="card">
+            <div class="profile">
+                <div class="profile-info">
+                    <div class="name">个人收藏站点</div>
+                    <div class="status">https://s0zjiuzgd8.feishu.cn/docx/BGHudEZMzoO7IExBRWNcbAzynZd</div>
+                </div>
+            </div>
+            <div class="quote">“</div>
+            <div class="content">
+                <p>还没想好写什么</p>
+            </div>
+        </a>
     </div>
 </body>
 </html>
