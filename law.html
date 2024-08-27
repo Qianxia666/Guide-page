@@ -131,7 +131,7 @@
 <div id="statusMessage"></div>
 
 <script>
-    const currentVersion = 'V1.0 Beta1'; // 当前协议版本
+    const currentVersion = 'V1.0 Beta2'; // 当前协议版本
     const agreementContainer = document.getElementById('agreementContainer');
     const button = document.getElementById('agreeButton');
     const statusMessage = document.getElementById('statusMessage');
@@ -176,7 +176,7 @@
         if (button.classList.contains('disabled')) return; // 如果按钮被禁用，直接返回
         localStorage.setItem('hasAgreed', 'true'); // 设置用户同意状态
         localStorage.setItem('agreementVersion', currentVersion); // 存储协议版本
-        statusMessage.textContent = '您已同意使用协议。'; // 显示同意状态信息
+        statusMessage.textContent = '您已同意最新一版的使用条款，正在跳转中...'; // 显示同意状态信息
         agreementContainer.style.display = 'none'; // 隐藏协议内容
         button.style.display = 'none'; // 隐藏按钮
         // 跳转到指定页面
