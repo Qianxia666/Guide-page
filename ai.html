@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIGC</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #333;
+            overflow-x: hidden; /* 防止横向滚动 */
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+            height: 100vh; /* 使 body 高度为视口高度 */
+        }
+        header {
+            display: flex;
+            justify-content: center; /* 中心对齐 */
+            padding: 15px 20px;
+            background-color: white;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+            position: absolute; /* 使头部固定在顶部 */
+            width: 100%; /* 使头部宽度为 100% */
+            top: 0; /* 顶部对齐 */
+        }
+        h1 {
+            margin: 0;
+            font-size: 24px; /* 调整字号 */
+        }
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* 水平居中 */
+            padding: 60px 20px; /* 减少内边距 */
+            text-align: center; /* 中心对齐文本 */
+            max-width: 800px; /* 设置最大宽度 */
+        }
+        .hero h1 {
+            font-size: 36px; /* 调整字号 */
+            line-height: 1.2;
+            margin: 0;
+        }
+        .hero h1 span {
+            background-color: #FFE4B5; /* 淡橙色 */
+            padding: 0 5px;
+        }
+        .hero p {
+            font-size: 16px; /* 调整字号 */
+            margin: 15px 0;
+            line-height: 1.5;
+            color: #666;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px; /* 按钮之间的间距 */
+            margin-top: 20px;
+        }
+        .button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            text-decoration: none; /* 去掉链接下划线 */
+            display: inline-block; /* 使链接表现为块元素 */
+        }
+        .button.primary {
+            background-color: #003B5C; /* 左边按钮深色 */
+            color: white; /* 文字颜色为白色 */
+        }
+        .button.primary:hover {
+            background-color: #002A43; /* 悬停时的颜色 */
+        }
+        .button.secondary {
+            background-color: #f0f0f0; /* 浅色背景 */
+            color: black; /* 文字颜色改为黑色 */
+        }
+        .button.secondary:hover {
+            background-color: #e0e0e0; /* 悬停时的颜色 */
+        }
+
+        /* 媒体查询 */
+        @media (min-width: 768px) {
+            .hero {
+                padding: 60px 40px; /* 增加内边距 */
+            }
+            .hero h1 {
+                font-size: 48px; /* 增加标题字号 */
+            }
+            .hero p {
+                font-size: 18px; /* 增加段落字号 */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>AIGC</h1>
+</header>
+<section class="hero">
+    <h1>无限<span>进步</span> 助力腾飞</h1>
+    <p>我们致力于以卓越的效率，创造出既美观又实用的产品，从设计到构建，再到交付与扩展，每一步都如艺术般璀璨！如您需要相关开放模型信息的帮助，请移步到 <a href="https://web.996898.xyz/faq.html">FAQ</a>页面查看。</p>
+    <div class="buttons">
+        <a href="https://ai1.996898.xyz" class="button primary">NextWeb</a>
+        <a href="https://ai2.996898.xyz" class="button secondary">LobeHub</a>
+    </div>
+</section>
+
+<script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/0.1.0-beta.5/libs/cn/index.js"></script>
+<script>
+    new CozeWebSDK.WebChatClient({
+        config: {
+            bot_id: '7409497922368585754',
+        },
+        componentProps: {
+            title: 'Coze',
+        },
+    });
+</script>
+</body>
+</html>
