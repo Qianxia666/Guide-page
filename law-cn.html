@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #eef1f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0056b3;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #0056b3;
+            margin-top: 20px;
+        }
+
+        p {
+            text-align: justify;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .floating-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 15px 30px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s;
+            font-size: 16px;
+        }
+
+        .floating-button:hover {
+            background-color: #004494;
+            transform: translateY(-5px);
+        }
+
+        .disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #statusMessage {
+            text-align: center;
+            margin-top: 20px;
+            color: green;
+            font-weight: bold;
+        }
+
+        .version-info {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="agreementContainer">
+    <h1>使用协议</h1>
+    
+    <div class="version-info">
+        <p>服务器协议版本: <strong id="currentVersion"></strong></p>
+        <p>本地协议版本: <strong id="storedVersion"></strong></p>
+        <p>更新内容速览：开放模型更新，协议内容更新</p>
+    </div>
+
+    <p>在使用本网站之前，请仔细阅读以下条款。继续使用本网站即表示您同意遵守这些条款。</p>
+
+    <h2>开发者信息</h2>
+    <p><strong>Bot</strong>系由<strong>本站</strong>（下文称为“我们”）向你提供服务。Bot名称以实际使用时的名称为准。</p>
+
+    <h2>我们如何收集、使用信息</h2>
+    
+    <h3>主要功能场景及个人信息收集处理情况</h3>
+    
+    <h4>场景：智能对话及互动</h4>
+    <p><strong>个人信息范围：</strong>你主动输入的信息、指令</p>
+    <p><strong>处理方式：</strong>收集、存储你的输入数据</p>
+    <p><strong>处理目的：</strong>向你提供对话及互动服务</p>
+
+    <h4>场景：修复bug，改善产品/服务</h4>
+    <p><strong>个人信息范围：</strong>你主动输入的信息、指令</p>
+    <p><strong>处理方式：</strong>分析你的输入数据</p>
+    <p><strong>处理目的：</strong>分析我们服务的使用和表现情况、不断改善我们的产品</p>
+
+    <h3>接入的第三方服务</h3>
+    <p>为了保障相关功能的实现，我们接入了以下第三方服务。我们可能与这些第三方共享你输入的信息、指令及/或你的检索意图。</p>
+    <p><strong>模型：</strong>豆包、通义等相关大模型</p>
+    <p><strong>其他第三方服务：</strong></p>
+    <ul>
+        <li>工作流</li>
+    </ul>
+
+    <h2>我们的承诺</h2>
+    <p>我们依照法律法规的规定，将在境内运营过程中收集和产生的你的个人信息存储于中华人民共和国境内。</p>
+    <p>我们非常重视你的个人信息安全，将努力采取合理的安全措施来保护你的个人信息，防止你提供的个人信息被不当使用或未经授权的情况下被访问、公开披露、使用、修改、损坏、丢失或泄漏。我们承诺遵循适用的法律法规，如《个人信息保护法》等。</p>
+
+    <h2>如何联系我们</h2>
+    <p>你可以通过<strong>邮箱</strong>方式与我们联系，行使查阅、复制、更正、删除等法定权利。</p>
+    <p>如果你对本隐私政策或你的权益有任何疑问、主张，你也可以通过上述方式来联系我们。</p>
+</div>
+
+<button class="floating-button" id="agreeButton" onclick="agreeTerms()">
+    我已阅读并同意该条款
+</button>
+
+<div id="statusMessage"></div>
+
+<script>
+    const currentVersion = 'V1.0 CN Beta1'; // 当前协议版本
+    const agreementContainer = document.getElementById('agreementContainer');
+    const button = document.getElementById('agreeButton');
+    const statusMessage = document.getElementById('statusMessage');
+    const storedVersionElement = document.getElementById('storedVersion');
+    const currentVersionElement = document.getElementById('currentVersion');
+
+    // 显示当前协议版本
+    currentVersionElement.textContent = currentVersion;
+
+    // 检查用户是否已经同意条款
+    const storedVersion = localStorage.getItem('agreementVersion');
+    const hasAgreed = localStorage.getItem('hasAgreed') === 'true';
+
+    // 显示用户已经同意的协议版本
+    storedVersionElement.textContent = storedVersion ? storedVersion : '尚未同意过条款';
+
+    if (hasAgreed && storedVersion === currentVersion) {
+        // 显示同意状态信息
+        statusMessage.textContent = '您已同意使用条款，正在跳转中...';
+        agreementContainer.style.display = 'none'; // 隐藏协议内容
+        button.style.display = 'none'; // 隐藏按钮
+        // 直接跳转到指定页面
+        window.location.href = 'https://web.996898.xyz/ai.html';
+    } else {
+        // 如果没有同意，显示协议内容
+        let waitTime = 10; // 等待时间
+        button.classList.add('disabled'); // 初始按钮为禁用状态
+        button.textContent = `请等待 ${waitTime} 秒`;
+
+        const countdown = setInterval(() => {
+            waitTime--;
+            button.textContent = `请等待 ${waitTime} 秒`;
+            if (waitTime <= 0) {
+                clearInterval(countdown);
+                button.classList.remove('disabled'); // 启用按钮
+                button.textContent = '我已阅读并同意该条款'; // 恢复按钮文本
+            }
+        }, 1000);
+    }
+
+    function agreeTerms() {
+        if (button.classList.contains('disabled')) return; // 如果按钮被禁用，直接返回
+        localStorage.setItem('hasAgreed', 'true'); // 设置用户同意状态
+        localStorage.setItem('agreementVersion', currentVersion); // 存储协议版本
+        statusMessage.textContent = '您已同意最新一版的使用条款，正在跳转中...'; // 显示同意状态信息
+        agreementContainer.style.display = 'none'; // 隐藏协议内容
+        button.style.display = 'none'; // 隐藏按钮
+        // 跳转到指定页面
+        window.location.href = 'https://web.996898.xyz/ai-cn.html';
+    }
+</script>
+
+</body>
+</html>
