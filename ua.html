@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UA检测工具</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+:root {
+    --primary-color: #5b6af0;
+    --primary-light: #7c89f7;
+    --secondary-color: #42b883;
+    --background-color: #f8fafc;
+    --card-background: #ffffff;
+    --text-color: #1a1f36;
+    --text-secondary: #4a5568;
+    --border-radius: 16px;
+    --shadow: 0 10px 20px rgba(0,0,0,0.08);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --card-border: 1px solid rgba(91, 106, 240, 0.1);
+}
+
+[data-theme="dark"] {
+    --primary-color: #7c89f7;
+    --primary-light: #9ea8ff;
+    --secondary-color: #42b883;
+    --background-color: #0f172a;
+    --card-background: #1e293b;
+    --text-color: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --card-border: 1px solid rgba(124, 137, 247, 0.1);
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+    transition: var(--transition);
+    min-height: 100vh;
+    background-image: 
+        radial-gradient(at 40% 20%, rgba(91, 106, 240, 0.1) 0px, transparent 50%),
+        radial-gradient(at 80% 0%, rgba(66, 184, 131, 0.1) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, rgba(91, 106, 240, 0.1) 0px, transparent 50%);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 40px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    border-radius: var(--border-radius);
+    color: white;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1));
+    animation: shine 2s infinite;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) translateY(-100%);
+    }
+    100% {
+        transform: translateX(100%) translateY(100%);
+    }
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2.8em;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.header p {
+    margin: 15px 0 0;
+    opacity: 0.9;
+    font-size: 1.1em;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    gap: 20px;
+}
+
+.copy-btn {
+    background-color: var(--card-background);
+    color: var(--primary-color);
+    border: var(--card-border);
+    padding: 12px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.copy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(91, 106, 240, 0.2);
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.info-section {
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+    border: var(--card-border);
+    backdrop-filter: blur(10px);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(91, 106, 240, 0.1);
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 1.6em;
+    font-weight: 600;
+    color: var(--primary-color);
+    letter-spacing: -0.5px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+.info-card {
+    background: var(--card-background);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    border: var(--card-border);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.info-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    transform: scaleX(0);
+    transition: var(--transition);
+}
+
+.info-card:hover::after {
+    transform: scaleX(1);
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(91, 106, 240, 0.1);
+}
+
+.info-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: 12px;
+    font-size: 0.95em;
+}
+
+.info-value {
+    font-size: 1.1em;
+    color: var(--text-color);
+    font-weight: 500;
+    word-break: break-all;
+}
+
+.progress-bar {
+    height: 8px;
+    background-color: rgba(91, 106, 240, 0.1);
+    border-radius: 4px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    transition: width 0.5s ease;
+}
+
+.support-yes {
+    color: var(--secondary-color);
+    font-size: 1.1em;
+}
+
+.support-no {
+    color: #ef4444;
+    font-size: 1.1em;
+}
+
+.timestamp {
+    text-align: center;
+    margin-top: 40px;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.success-message {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--secondary-color);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 12px;
+    display: none;
+    animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 20px rgba(66, 184, 131, 0.2);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%) translateY(10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 新增动画效果 */
+.info-card i {
+    transition: var(--transition);
+}
+
+.info-card:hover i {
+    transform: scale(1.2);
+    color: var(--primary-color);
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .header {
+        padding: 30px 20px;
+    }
+    
+    .header h1 {
+        font-size: 2em;
+    }
+    
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .copy-btn {
+        justify-content: center;
+    }
+}
+
+/* 添加滚动条美化 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-light);
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-desktop"></i> UA检测工具</h1>
+            <p>全方位检测您的UA信息</p>
+        </header>
+
+        <div class="controls">
+            <div class="theme-switch">
+                <button id="theme-toggle" class="copy-btn">
+                    <i class="fas fa-moon"></i> 切换主题
+                </button>
+            </div>
+            <button id="refresh-btn" class="copy-btn">
+                <i class="fas fa-sync-alt"></i> 刷新信息
+            </button>
+        </div>
+
+        <!-- 基本信息部分 -->
+        <section class="info-section">
+            <div class="section-header">
+                <i class="fas fa-info-circle"></i>
+                <h2>基本信息</h2>
+            </div>
+            <div class="info-card">
+                <div class="info-label">
+                    <i class="fas fa-code"></i> User Agent
+                </div>
+                <div id="full-ua" class="info-value"></div>
+                <button class="copy-btn" onclick="copyUA()">
+                    <i class="fas fa-copy"></i> 复制UA
+                </button>
+            </div>
+            <div class="grid">
+                <div class="info-card">
+                    <div class="info-label">
+                        <i class="fas fa-globe"></i> 浏览器
+                    </div>
+                    <div id="browser-info" class="info-value"></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">
+                        <i class="fas fa-laptop"></i> 操作系统
+                    </div>
+                    <div id="os-info" class="info-value"></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">
+                        <i class="fas fa-mobile-alt"></i> 设备类型
+                    </div>
+                    <div id="device-info" class="info-value"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 硬件信息部分 -->
+        <section class="info-section">
+            <div class="section-header">
+                <i class="fas fa-microchip"></i>
+                <h2>硬件信息</h2>
+            </div>
+            <div class="grid">
+                <div class="info-card">
+                    <div class="info-label">
+                        <i class="fas fa-memory"></i> 内存状态
+                    </div>
+                    <div id="memory-info" class="info-value"></div>
+                    <div class="progress-bar">
+                        <div id="memory-usage" class="progress-bar-fill"></div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">
+                        <i class="fas fa-processor"></i> CPU信息
+                    </div>
+                    <div id="cpu-info" class="info-value"></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">
+                        <i class="fas fa-battery-full"></i> 电池状态
+                    </div>
+                    <div id="battery-info" class="info-value"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 显示信息部分 -->
+        <section class="info-section">
+            <div class="section-header">
+                <i class="fas fa-tv"></i>
+                <h2>显示信息</h2>
+            </div>
+            <div class="grid">
+                <div class="info-card">
+                    <div class="info-label">
+                        <i class="fas fa-expand"></i> 屏幕分辨率
+                    </div>
+                    <div id="screen-resolution" class="info-value"></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">
+                        <i class="fas fa-window-maximize"></i> 窗口大小
+                    </div>
+                    <div id="window-size" class="info-value"></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">
+                        <i class="fas fa-compress-arrows-alt"></i> 像素比
+                    </div>
+                    <div id="pixel-ratio" class="info-value"></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">
+                        <i class="fas fa-palette"></i> 颜色深度
+                    </div>
+                    <div id="color-depth" class="info-value"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 网络信息部分 -->
+        <section class="info-section">
+            <div class="section-header">
+                <i class="fas fa-network-wired"></i>
+                <h2>网络信息</h2>
+            </div>
+            <div class="grid">
+                <div class="info-card">
+                    <div class="info-label">
+                        <i class="fas fa-wifi"></i> 连接状态
+                    </div>
+                    <div id="connection-status" class="info-value"></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">
+                        <i class="fas fa-tachometer-alt"></i> 网络类型
+                    </div>
+                    <div id="connection-type" class="info-value"></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">
+                        <i class="fas fa-download"></i> 下载速度
+                    </div>
+                    <div id="download-speed" class="info-value"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 功能支持部分 -->
+        <section class="info-section">
+            <div class="section-header">
+                <i class="fas fa-check-circle"></i>
+                <h2>功能支持</h2>
+            </div>
+            <div class="grid">
+                <div class="info-card">
+                    <div class="info-label">
+                        <i class="fas fa-cube"></i> WebGL支持
+                    </div>
+                    <div id="webgl-support" class="info-value"></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">
+                        <i class="fas fa-paint-brush"></i> Canvas支持
+                    </div>
+                    <div id="canvas-support" class="info-value"></div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">
+                        <i class="fas fa-microphone"></i> 媒体设备
+                    </div>
+                    <div id="media-support" class="info-value"></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="timestamp" id="timestamp"></div>
+    </div>
+
+    <div id="copy-message" class="success-message">
+        <i class="fas fa-check"></i> 复制成功！
+    </div>
+
+    <script>
+// 主题切换
+const themeToggle = document.getElementById('theme-toggle');
+let isDarkMode = false;
+
+themeToggle.addEventListener('click', () => {
+    isDarkMode = !isDarkMode;
+    document.body.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+    themeToggle.innerHTML = `<i class="fas fa-${isDarkMode ? 'sun' : 'moon'}"></i> ${isDarkMode ? '浅色' : '深色'}模式`;
+});
+
+// 刷新按钮
+document.getElementById('refresh-btn').addEventListener('click', () => {
+    location.reload();
+});
+
+// 基本信息检测
+const ua = navigator.userAgent;
+document.getElementById('full-ua').textContent = ua;
+
+// UA复制功能
+function copyUA() {
+    navigator.clipboard.writeText(ua).then(() => {
+        const message = document.getElementById('copy-message');
+        message.style.display = 'block';
+        setTimeout(() => {
+            message.style.display = 'none';
+        }, 2000);
+    });
+}
+
+// 浏览器检测
+function detectBrowser() {
+    const browsers = {
+        'Edge': /Edg/i,
+        'Chrome': /Chrome/i,
+        'Firefox': /Firefox/i,
+        'Safari': /Safari/i,
+        'Opera': /Opera|OPR/i,
+        'IE': /Trident|MSIE/i
+    };
+    
+    for (let browser in browsers) {
+        if (browsers[browser].test(ua)) {
+            const version = ua.match(new RegExp(`${browser}\\/([0-9.]+)`, 'i'));
+            return `${browser} ${version ? version[1] : ''}`;
+        }
+    }
+    return '未知浏览器';
+}
+
+// 操作系统检测
+function detectOS() {
+    const os = {
+        'Windows': /Windows NT ([0-9.]+)/i,
+        'macOS': /Mac OS X ([0-9._]+)/i,
+        'Linux': /Linux/i,
+        'Android': /Android ([0-9.]+)/i,
+        'iOS': /iPhone OS ([0-9_]+)/i
+    };
+    
+    for (let system in os) {
+        const match = ua.match(os[system]);
+        if (match) {
+            const version = match[1] ? ` ${match[1].replace(/_/g, '.')}` : '';
+            return `${system}${version}`;
+        }
+    }
+    return '未知系统';
+}
+
+// 设备类型检测
+function detectDevice() {
+    const devices = {
+        'iPad': /iPad/i,
+        'iPhone': /iPhone/i,
+        'Android': /Android/i,
+        'Windows Phone': /Windows Phone/i,
+        'Desktop': /Windows NT|Macintosh|Linux/i
+    };
+
+    for (let device in devices) {
+        if (devices[device].test(ua)) {
+            return device;
+        }
+    }
+    return '未知设备';
+}
+
+// 硬件信息检测
+async function getHardwareInfo() {
+    // CPU信息
+    const cpuCores = navigator.hardwareConcurrency || '未知';
+    document.getElementById('cpu-info').textContent = `${cpuCores} 核心`;
+
+    // 内存信息
+    if (performance.memory) {
+        const totalMemory = Math.round(performance.memory.jsHeapSizeLimit / 1024 / 1024);
+        const usedMemory = Math.round(performance.memory.usedJSHeapSize / 1024 / 1024);
+        const memoryUsage = (usedMemory / totalMemory * 100).toFixed(1);
+        
+        document.getElementById('memory-info').textContent = 
+            `${usedMemory}MB / ${totalMemory}MB (${memoryUsage}%)`;
+        document.getElementById('memory-usage').style.width = `${memoryUsage}%`;
+    } else {
+        document.getElementById('memory-info').textContent = '不支持内存信息检测';
+    }
+
+    // 电池信息
+    if ('getBattery' in navigator) {
+        try {
+            const battery = await navigator.getBattery();
+            const batteryInfo = `电量: ${Math.round(battery.level * 100)}% ${battery.charging ? '(充电中)' : ''}`;
+            document.getElementById('battery-info').textContent = batteryInfo;
+        } catch (e) {
+            document.getElementById('battery-info').textContent = '无法获取电池信息';
+        }
+    } else {
+        document.getElementById('battery-info').textContent = '不支持电池信息检测';
+    }
+}
+
+// 显示信息检测
+function getDisplayInfo() {
+    const screenInfo = {
+        resolution: `${screen.width}x${screen.height}`,
+        windowSize: `${window.innerWidth}x${window.innerHeight}`,
+        pixelRatio: window.devicePixelRatio,
+        colorDepth: `${screen.colorDepth}位色彩`
+    };
+
+    document.getElementById('screen-resolution').textContent = screenInfo.resolution;
+    document.getElementById('window-size').textContent = screenInfo.windowSize;
+    document.getElementById('pixel-ratio').textContent = screenInfo.pixelRatio;
+    document.getElementById('color-depth').textContent = screenInfo.colorDepth;
+}
+
+// 网络信息检测
+function getNetworkInfo() {
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    
+    document.getElementById('connection-status').textContent = 
+        navigator.onLine ? '在线' : '离线';
+
+    if (connection) {
+        document.getElementById('connection-type').textContent = 
+            `${connection.effectiveType || '未知'} (${connection.type || '未知类型'})`;
+        
+        if (connection.downlink) {
+            document.getElementById('download-speed').textContent = 
+                `${connection.downlink} Mbps`;
+        } else {
+            document.getElementById('download-speed').textContent = '未知';
+        }
+    } else {
+        document.getElementById('connection-type').textContent = '无法获取网络信息';
+        document.getElementById('download-speed').textContent = '未知';
+    }
+}
+
+// 功能支持检测
+function checkFeatureSupport() {
+    // WebGL支持
+    const webglSupport = (() => {
+        try {
+            const canvas = document.createElement('canvas');
+            return !!(window.WebGLRenderingContext && 
+                (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+        } catch(e) {
+            return false;
+        }
+    })();
+    document.getElementById('webgl-support').innerHTML = 
+        webglSupport ? '<i class="fas fa-check support-yes"></i> 支持' : 
+                      '<i class="fas fa-times support-no"></i> 不支持';
+
+    // Canvas支持
+    const canvasSupport = (() => {
+        const elem = document.createElement('canvas');
+        return !!(elem.getContext && elem.getContext('2d'));
+    })();
+    document.getElementById('canvas-support').innerHTML = 
+        canvasSupport ? '<i class="fas fa-check support-yes"></i> 支持' : 
+                       '<i class="fas fa-times support-no"></i> 不支持';
+
+    // 媒体设备支持
+    const mediaSupport = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+    document.getElementById('media-support').innerHTML = 
+        mediaSupport ? '<i class="fas fa-check support-yes"></i> 支持' : 
+                      '<i class="fas fa-times support-no"></i> 不支持';
+}
+
+// 时间戳更新
+function updateTimestamp() {
+    document.getElementById('timestamp').textContent = 
+        `检测时间: ${new Date().toLocaleString()}`;
+}
+
+// 页面加载完成后初始化所有信息
+window.addEventListener('load', async () => {
+    document.getElementById('browser-info').textContent = detectBrowser();
+    document.getElementById('os-info').textContent = detectOS();
+    document.getElementById('device-info').textContent = detectDevice();
+    
+    await getHardwareInfo();
+    getDisplayInfo();
+    getNetworkInfo();
+    checkFeatureSupport();
+    updateTimestamp();
+});
+
+// 窗口大小改变时更新显示信息
+window.addEventListener('resize', () => {
+    getDisplayInfo();
+});
+
+// 网络状态改变时更新网络信息
+window.addEventListener('online', getNetworkInfo);
+window.addEventListener('offline', getNetworkInfo);
+
+// 定期更新时间戳
+setInterval(updateTimestamp, 1000);
+
+// 定期更新硬件信息
+setInterval(getHardwareInfo, 5000);
+    </script>
+</body>
+</html>
