@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阅后即焚</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 添加一个简易的按钮渐变效果 */
+        .btn-gradient {
+            background: linear-gradient(to right, #4cafef, #8a6df1);
+            transition: transform 0.2s, background-color 0.3s;
+        }
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(to right, #369fee, #7455e8);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen">
+    <!-- 主容器 -->
+    <div class="container p-6 bg-white rounded-lg shadow-md max-w-xl w-full space-y-6">
+        <!-- 标题 -->
+        <h1 class="text-2xl font-semibold text-center text-blue-600">阅后即焚</h1>
+
+        <!-- 输入消息的表单 -->
+        <div id="inputSection" class="space-y-4">
+            <textarea id="messageInput" 
+                class="w-full border border-gray-300 rounded-lg p-4 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none" 
+                placeholder="输入你的消息..."
+                rows="5"
+                oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"></textarea>
+            <button id="generateLink" 
+                class="w-full py-2 px-4 text-white font-medium rounded-lg btn-gradient">
+                生成链接
+            </button>
+        </div>
+
+        <!-- 显示消息的区域 -->
+        <div id="messageSection" class="hidden text-center">
+            <p class="text-gray-700 text-lg font-medium mb-4" id="messageDisplay"></p>
+            <button id="copyLink" 
+                class="bg-blue-500 text-white py-2 px-4 rounded-lg w-full mb-2 hover:bg-blue-600 transition duration-300">
+                复制链接
+            </button>
+            <button id="newMessage" 
+                class="bg-gray-500 text-white py-2 px-4 rounded-lg w-full hover:bg-gray-600 transition duration-300">
+                新消息
+            </button>
+        </div>
+
+        <!-- 提示消息已被查看 -->
+        <div id="errorSection" class="hidden text-center">
+            <p class="text-red-500 text-lg font-medium mb-4" id="errorMessage"></p>
+            <button id="newMessageFromError" 
+                class="bg-gray-500 text-white py-2 px-4 rounded-lg w-full hover:bg-gray-600 transition duration-300">
+                新消息
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const inputSection = document.getElementById('inputSection');
+        const messageSection = document.getElementById('messageSection');
+        const errorSection = document.getElementById('errorSection');
+        const messageInput = document.getElementById('messageInput');
+        const messageDisplay = document.getElementById('messageDisplay');
+        const errorMessage = document.getElementById('errorMessage');
+        const generateLinkButton = document.getElementById('generateLink');
+        const copyLinkButton = document.getElementById('copyLink');
+        const newMessageButton = document.getElementById('newMessage');
+        const newMessageFromErrorButton = document.getElementById('newMessageFromError');
+
+        // 检查 URL 中是否有消息 ID
+        const urlParams = new URLSearchParams(window.location.search);
+        const messageId = urlParams.get('id');
+        if (messageId) {
+            // 如果有消息 ID，尝试加载消息
+            loadMessage(messageId);
+        } else {
+            // 如果没有消息 ID，显示输入表单
+            showInputForm();
+        }
+
+        // 生成链接
+        generateLinkButton.addEventListener('click', () => {
+            const message = messageInput.value.trim();
+            if (message) {
+                const messageId = generateUniqueId();
+                const link = `${window.location.origin}${window.location.pathname}?id=${messageId}`;
+                // 存储消息到 localStorage
+                localStorage.setItem(messageId, message);
+                // 显示消息区域
+                showMessageSection(link);
+            } else {
+                alert('请输入消息！');
+            }
+        });
+
+        // 复制链接
+        copyLinkButton.addEventListener('click', () => {
+            const link = window.location.href;
+            navigator.clipboard.writeText(link).then(() => {
+                alert('链接已复制到剪贴板！');
+            });
+        });
+
+        // 新消息
+        newMessageButton.addEventListener('click', resetPage);
+        newMessageFromErrorButton.addEventListener('click', resetPage);
+
+        // 加载消息
+        function loadMessage(messageId) {
+            const message = localStorage.getItem(messageId);
+            if (message) {
+                // 如果是第一个用户，显示消息并销毁
+                showMessage(message);
+                localStorage.removeItem(messageId); // 销毁消息
+            } else {
+                // 如果不是第一个用户，提示消息已被查看
+                showError('消息已被查看或不存在！');
+            }
+        }
+
+        // 显示消息
+        function showMessage(message) {
+            inputSection.classList.add('hidden');
+            messageSection.classList.remove('hidden');
+            errorSection.classList.add('hidden');
+            messageDisplay.textContent = message;
+        }
+
+        // 显示错误提示
+        function showError(error) {
+            inputSection.classList.add('hidden');
+            messageSection.classList.add('hidden');
+            errorSection.classList.remove('hidden');
+            errorMessage.textContent = error;
+        }
+
+        // 显示输入表单
+        function showInputForm() {
+            inputSection.classList.remove('hidden');
+            messageSection.classList.add('hidden');
+            errorSection.classList.add('hidden');
+        }
+
+        // 显示消息区域
+        function showMessageSection(link) {
+            inputSection.classList.add('hidden');
+            messageSection.classList.remove('hidden');
+            errorSection.classList.add('hidden');
+            messageDisplay.textContent = '你的链接已生成：';
+            const linkElement = document.createElement('a');
+            linkElement.href = link;
+            linkElement.textContent = link;
+            linkElement.target = '_blank';
+            linkElement.classList.add('text-blue-500', 'underline', 'block', 'mt-2');
+            messageDisplay.appendChild(linkElement);
+        }
+
+        // 重置页面
+        function resetPage() {
+            window.location.href = window.location.origin + window.location.pathname;
+        }
+
+        // 生成唯一 ID
+        function generateUniqueId() {
+            return 'msg-' + Math.random().toString(36).substr(2, 9);
+        }
+    </script>
+</body>
+</html>
