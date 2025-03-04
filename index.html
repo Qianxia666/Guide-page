@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Our Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            background: url('https://images.unsplash.com/photo-1726402919430-a4521f2b1fa6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .overlay {
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.1) 100%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .content {
+            position: relative;
+            text-align: left;
+            z-index: 1;
+            padding: 40px;
+            max-width: 600px;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-style: italic;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        .notify-button {
+            height: 40px; /* 按钮高度 */
+            font-size: 0.9em; /* 按钮字体大小 */
+            font-weight: bold; /* 字体加粗 */
+            border: none;
+            outline: none;
+            padding: 0 10px; /* 内边距，左右各10px */
+            border-radius: 30px; /* 圆角 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            background-color: white; /* 白色背景 */
+            color: black; /* 文字颜色为黑色 */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* 中间对齐 */
+            text-decoration: none; /* 去掉下划线 */
+            max-width: 150px; /* 设置最大宽度 */
+        }
+        .notify-button:hover {
+            background-color: #f1f1f1;
+            transform: translateY(-2px);
+        }
+        .notify-text {
+            margin-right: 5px; /* 文字与箭头之间的间距 */
+            margin-left: 5px; /* 文字稍微向右 */
+        }
+        .arrow-icon {
+            margin-left: 5px; /* 箭头与文字之间的间距 */
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="content">
+        <h1>Discover Our Website</h1>
+        <p>Come explore and have fun!</p>
+        <a href="https://blog.996898.xyz/10461768-fbd0-8015-8752-e4caddd28bb1" class="notify-button">
+            <span class="notify-text">Follow</span>
+            <i class="fas fa-arrow-right arrow-icon"></i>
+        </a> <!-- 添加箭头图标 -->
+    </div>
+</body>
+</html>
