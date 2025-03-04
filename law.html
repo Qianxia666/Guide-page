@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>免责声明</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --warning-color: #e74c3c;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 40px;
+            background-color: #f8f9fa;
+            color: var(--primary-color);
+        }
+
+        .legal-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 60px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            counter-reset: section;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+
+        .clause-section {
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .clause-section::before {
+            counter-increment: section;
+            content: counter(section) ". ";
+            position: absolute;
+            left: -50px;
+            color: var(--accent-color);
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            font-size: 1.8em;
+            margin: 30px 0 20px;
+        }
+
+        h3 {
+            color: #7f8c8d;
+            font-size: 1.4em;
+            margin: 25px 0 15px;
+        }
+
+        ul {
+            padding-left: 0;
+            margin: 15px 0;
+            list-style-type: none;
+        }
+
+        li {
+            margin: 12px 0;
+            padding-left: 0;
+        }
+
+        .warning-box {
+            background: #fef2f2;
+            border-left: 6px solid var(--warning-color);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+
+        .print-only {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            
+            .legal-container {
+                padding: 30px;
+            }
+            
+            .clause-section::before {
+                left: -30px;
+            }
+        }
+
+        @media print {
+            .legal-container {
+                box-shadow: none;
+                padding: 0;
+            }
+            .print-only {
+                display: block;
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="legal-container">
+        <h1>免责声明</h1>
+
+        <!-- 第1章 服务性质声明 -->
+        <div class="clause-section">
+            <h2>服务性质声明</h2>
+            
+            <div class="sub-clause">
+                <h3>1.1 服务范围</h3>
+                <p>本平台提供的AI服务（包括但不限于自然语言处理、图像识别、预测分析等）基于机器学习算法生成结果，输出内容不代表本平台观点，且不构成任何形式的专业建议（包括法律、医疗、财务等领域）。</p>
+            </div>
+
+            <div class="sub-clause">
+                <h3>1.2 技术限制</h3>
+                <p>用户理解并同意AI技术存在固有局限性，输出结果可能包含不准确、冒犯性、误导性或其他不适当内容，相关风险由用户自行承担。</p>
+            </div>
+        </div>
+
+        <!-- 第2章 责任限制 -->
+        <div class="clause-section">
+            <h2>责任限制</h2>
+            
+            <div class="sub-clause">
+                <h3>2.1 免责范围</h3>
+                <p>在适用法律允许的最大范围内，平台方对以下情形不承担责任：</p>
+                <ul>
+                    <li>- 服务中断、延迟、错误、数据丢失或安全性漏洞</li>
+                    <li>- 用户因使用API导致的直接/间接损失（包括利润损失、商誉损害、数据损失等）</li>
+                    <li>- 第三方基于API输出内容采取行动导致的后果</li>
+                    <li>- AI生成内容侵犯第三方知识产权或其他合法权益</li>
+                </ul>
+            </div>
+
+            <div class="sub-clause">
+                <h3>2.2 赔偿上限</h3>
+                <p>总赔偿责任不超过用户最近0个月支付的服务费用总额。</p>
+            </div>
+        </div>
+
+        <!-- 第3章 用户义务 -->
+        <div class="clause-section">
+            <h2>用户义务</h2>
+            
+            <div class="sub-clause">
+                <h3>3.1 禁止使用场景</h3>
+                <ul>
+                    <li>- 实施非法监控、歧视性分析、深度伪造生成</li>
+                    <li>- 违反数据隐私法规（包括GDPR、CCPA等）的数据处理</li>
+                    <li>- 自动化决策对个人权益产生法律效力</li>
+                    <li>- 军事用途、生物特征识别等高风险领域</li>
+                </ul>
+            </div>
+
+            <div class="sub-clause">
+                <h3>3.2 合规要求</h3>
+                <ul>
+                    <li>- 确保训练数据及输入内容已获得合法授权</li>
+                    <li>- 对人类决策实施必要监管</li>
+                    <li>- 在涉及个人数据的场景下完成数据保护影响评估</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 第4章 知识产权 -->
+        <div class="clause-section">
+            <h2>知识产权</h2>
+            
+            <div class="sub-clause">
+                <h3>4.1 权利归属</h3>
+                <p>输出内容的知识产权归属按双方协议约定处理，未明确约定时默认用户获得使用权许可。</p>
+            </div>
+
+            <div class="sub-clause">
+                <h3>4.2 数据授权</h3>
+                <p>用户保证输入数据不侵犯第三方权利，并授权平台方出于服务改进目的进行匿名化处理。</p>
+            </div>
+        </div>
+
+        <!-- 第5章 数据保护 -->
+        <div class="clause-section">
+            <h2>数据保护</h2>
+            
+            <div class="sub-clause">
+                <h3>5.1 处理规范</h3>
+                <p>数据处理遵循平台隐私政策，包括：</p>
+                <ul>
+                    <li>- 数据加密传输与存储</li>
+                    <li>- 数据保留期限及删除机制</li>
+                    <li>- 数据主体权利行使渠道</li>
+                </ul>
+            </div>
+
+            <div class="sub-clause">
+                <h3>5.2 自动化限制</h3>
+                <p>根据GDPR第22条，用户不得使用本服务进行完全自动化决策。</p>
+            </div>
+        </div>
+
+        <!-- 第6章 监管合规 -->
+        <div class="clause-section">
+            <h2>监管合规</h2>
+            
+            <div class="sub-clause">
+                <h3>6.1 高风险系统</h3>
+                <p>如API属于欧盟AI法案定义的高风险AI系统，需另行提供符合性声明。</p>
+            </div>
+
+            <div class="sub-clause">
+                <h3>6.2 出口管制</h3>
+                <p>用户承诺遵守相关技术出口限制（如EAR、瓦森纳协定）。</p>
+            </div>
+        </div>
+
+        <!-- 第7章 其他条款 -->
+        <div class="clause-section">
+            <h2>其他条款</h2>
+            
+            <div class="sub-clause">
+                <h3>7.1 适用法律</h3>
+                <p>根据用户所在地选择管辖法律（如欧盟用户适用爱尔兰法律，其他地区适用新加坡法律）。</p>
+            </div>
+
+            <div class="sub-clause">
+                <h3>7.2 争议解决</h3>
+                <p>约定宇宙为仲裁机构。</p>
+            </div>
+
+            <div class="sub-clause">
+                <h3>7.3 修改权利</h3>
+                <p>平台保留根据法律变化更新条款的权利，重大变更无需提前通知。</p>
+            </div>
+        </div>
+
+        <!-- 法律声明 -->
+        <div class="warning-box">
+            <h3>特别法律声明</h3>
+            <ul>
+                <li>本声明不构成对《消费者权益保护法》等强制性法规的排除，冲突条款以最新法律规定为准</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
