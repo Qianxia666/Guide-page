@@ -1,93 +1,402 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discover Our Website</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Houyinx</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#1E40AF',
+                        accent: '#DBEAFE',
+                        dark: '#1E293B',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
-            background: url('https://images.unsplash.com/photo-1726402919430-a4521f2b1fa6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            background-position: center;
         }
-        .overlay {
-            background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0.1) 100%);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-        .content {
-            position: relative;
-            text-align: left;
-            z-index: 1;
-            padding: 40px;
-            max-width: 600px;
-        }
-        h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            font-style: italic;
-        }
-        p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            line-height: 1.5;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-        .notify-button {
-            height: 40px; /* 按钮高度 */
-            font-size: 0.9em; /* 按钮字体大小 */
-            font-weight: bold; /* 字体加粗 */
-            border: none;
-            outline: none;
-            padding: 0 10px; /* 内边距，左右各10px */
-            border-radius: 30px; /* 圆角 */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            background-color: white; /* 白色背景 */
-            color: black; /* 文字颜色为黑色 */
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center; /* 中间对齐 */
-            text-decoration: none; /* 去掉下划线 */
-            max-width: 150px; /* 设置最大宽度 */
-        }
-        .notify-button:hover {
-            background-color: #f1f1f1;
-            transform: translateY(-2px);
-        }
-        .notify-text {
-            margin-right: 5px; /* 文字与箭头之间的间距 */
-            margin-left: 5px; /* 文字稍微向右 */
-        }
-        .arrow-icon {
-            margin-left: 5px; /* 箭头与文字之间的间距 */
+        .transition-all {
+            transition: all 0.3s ease;
         }
     </style>
 </head>
-<body>
-    <div class="overlay"></div>
-    <div class="content">
-        <h1>Discover Our Website</h1>
-        <p>Come explore and have fun!</p>
-        <a href="https://blog.996898.xyz/10461768-fbd0-8015-8752-e4caddd28bb1" class="notify-button">
-            <span class="notify-text">Follow</span>
-            <i class="fas fa-arrow-right arrow-icon"></i>
-        </a> <!-- 添加箭头图标 -->
-    </div>
+<body class="bg-gray-50 text-dark">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex-shrink-0 flex items-center">
+                        <svg class="h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        <span class="ml-2 text-xl font-bold text-dark">Houyinx</span>
+                    </a>
+                </div>
+                <div class="flex items-center md:hidden">
+                    <button type="button" class="text-gray-600 hover:text-primary">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="hero-section text-white py-32 md:py-48">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">企业方案倡导者</h1>
+                <p class="text-xl md:text-2xl mb-8">提供创新方案，助企实现数字化转型</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="https://blog.996898.xyz/10461768-fbd0-8015-8752-e4caddd28bb1" class="bg-primary hover:bg-secondary text-white font-medium py-3 px-6 rounded-md transition-all inline-block text-center">在线体验</a>
+                    <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzk0MjY3MTA3OA==&scene=124#wechat_redirect" class="bg-transparent border-2 border-white hover:bg-white hover:text-dark text-white font-medium py-3 px-6 rounded-md transition-all inline-block text-center">联系我们</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务概览 -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">我们的核心服务</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">为企业提供全方位的数字化解决方案，从战略咨询到技术实施，助力企业实现业务增长</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 服务项目1 -->
+                <div class="bg-gray-50 rounded-lg p-8 hover:shadow-lg transition-all">
+                    <div class="text-primary mb-4">
+                        <svg class="w-12 h-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">网站与应用开发</h3>
+                    <p class="text-gray-600 mb-4">打造响应式网站和移动应用，提供卓越的用户体验和功能性</p>
+                    <a href="services.html" class="text-primary font-medium hover:text-secondary transition-all inline-flex items-center">
+                        了解更多
+                        <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+                
+                <!-- 服务项目2 -->
+                <div class="bg-gray-50 rounded-lg p-8 hover:shadow-lg transition-all">
+                    <div class="text-primary mb-4">
+                        <svg class="w-12 h-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">数字营销策略</h3>
+                    <p class="text-gray-600 mb-4">制定全面的数字营销策略，提高品牌知名度和转化率</p>
+                    <a href="services.html" class="text-primary font-medium hover:text-secondary transition-all inline-flex items-center">
+                        了解更多
+                        <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+                
+                <!-- 服务项目3 -->
+                <div class="bg-gray-50 rounded-lg p-8 hover:shadow-lg transition-all">
+                    <div class="text-primary mb-4">
+                        <svg class="w-12 h-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">数据分析与优化</h3>
+                    <p class="text-gray-600 mb-4">利用数据分析工具，洞察用户行为，优化业务流程和决策</p>
+                    <a href="services.html" class="text-primary font-medium hover:text-secondary transition-all inline-flex items-center">
+                        了解更多
+                        <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们简介 -->
+    <section class="py-16 md:py-24 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="我们的团队" class="rounded-lg shadow-lg w-full h-auto">
+                </div>
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">关于Houyinx</h2>
+                    <p class="text-lg text-gray-600 mb-6">Houyinx成立于2010年，是一家专注于数字化转型的技术服务公司。我们拥有一支由行业专家组成的团队，致力于为客户提供最前沿的技术解决方案。</p>
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div>
+                            <div class="text-3xl font-bold text-primary mb-2">200+</div>
+                            <p class="text-gray-600">成功项目</p>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-primary mb-2">50+</div>
+                            <p class="text-gray-600">专业团队</p>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-primary mb-2">12+</div>
+                            <p class="text-gray-600">行业经验</p>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-primary mb-2">98%</div>
+                            <p class="text-gray-600">客户满意度</p>
+                        </div>
+                    </div>
+                    <a href="about.html" class="bg-primary hover:bg-secondary text-white font-medium py-3 px-6 rounded-md transition-all inline-block">了解更多</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 案例展示 -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">成功案例</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">我们为各行业的客户提供了创新的解决方案，帮助他们实现业务目标</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 案例1 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80" alt="电子商务平台" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">全渠道电商平台</h3>
+                        <p class="text-gray-600 mb-4">为某零售品牌打造全渠道电商平台，实现线上线下一体化运营</p>
+                        <a href="portfolio.html" class="text-primary font-medium hover:text-secondary transition-all inline-flex items-center">
+                            查看详情
+                            <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 案例2 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="金融科技应用" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">金融科技应用</h3>
+                        <p class="text-gray-600 mb-4">为某银行开发移动银行应用，提升用户体验和交易安全性</p>
+                        <a href="portfolio.html" class="text-primary font-medium hover:text-secondary transition-all inline-flex items-center">
+                            查看详情
+                            <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 案例3 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="智能制造解决方案" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">智能制造解决方案</h3>
+                        <p class="text-gray-600 mb-4">为某制造企业实施智能工厂解决方案，提高生产效率和质量</p>
+                        <a href="portfolio.html" class="text-primary font-medium hover:text-secondary transition-all inline-flex items-center">
+                            查看详情
+                            <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="portfolio.html" class="bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white font-medium py-3 px-6 rounded-md transition-all inline-block">查看更多案例</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 客户评价 -->
+    <section class="py-16 md:py-24 bg-accent">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">客户评价</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">听听我们的客户怎么说</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 评价1 -->
+                <div class="bg-white rounded-lg p-8 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Houyinx帮助我们成功实现了数字化转型，提高了运营效率，降低了成本。他们的团队专业且富有创造力，是值得信赖的合作伙伴。"</p>
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="客户头像" class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold">张女士</h4>
+                            <p class="text-gray-500 text-sm">某电子商务公司 CEO</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 评价2 -->
+                <div class="bg-white rounded-lg p-8 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"我们与Houyinx合作开发的移动应用获得了用户的高度评价。他们不仅技术过硬，而且深入理解我们的业务需求，提供了超出预期的解决方案。"</p>
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="客户头像" class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold">李先生</h4>
+                            <p class="text-gray-500 text-sm">某金融机构 CTO</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 评价3 -->
+                <div class="bg-white rounded-lg p-8 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 flex">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Houyinx为我们设计的数字营销策略帮助我们在短时间内提高了品牌知名度和销售额。他们的团队反应迅速，服务专业，是我们长期的战略合作伙伴。"</p>
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="客户头像" class="w-12 h-12 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold">王女士</h4>
+                            <p class="text-gray-500 text-sm">某零售品牌 市场总监</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 博客预览 -->
+    <section class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">最新资讯</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">了解行业趋势和我们的最新动态</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 博客文章1 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="数字化转型趋势" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="text-sm text-gray-500 mb-2">2023年10月15日</div>
+                        <h3 class="text-xl font-bold mb-2">2023年数字化转型的五大趋势</h3>
+                        <p class="text-gray-600 mb-4">探讨当前数字化转型的主要趋势，包括人工智能、物联网和区块链等技术的应用...</p>
+                        <a href="blog.html" class="text-primary font-medium hover:text-secondary transition-all inline-flex items-center">
+                            阅读更多
+                            <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 博客文章2 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="敏捷开发方法" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="text-sm text-gray-500 mb-2">2023年9月28日</div>
+                        <h3 class="text-xl font-bold mb-2">如何通过敏捷开发提高项目成功率</h3>
+                        <p class="text-gray-600 mb-4">分享敏捷开发的最佳实践，帮助团队提高项目交付效率和质量...</p>
+                        <a href="blog.html" class="text-primary font-medium hover:text-secondary transition-all inline-flex items-center">
+                            阅读更多
+                            <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 博客文章3 -->
+                <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="用户体验设计" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="text-sm text-gray-500 mb-2">2023年9月10日</div>
+                        <h3 class="text-xl font-bold mb-2">用户体验设计：从理论到实践</h3>
+                        <p class="text-gray-600 mb-4">探讨用户体验设计的核心原则和方法，以及如何在实际项目中应用...</p>
+                        <a href="blog.html" class="text-primary font-medium hover:text-secondary transition-all inline-flex items-center">
+                            阅读更多
+                            <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="blog.html" class="bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white font-medium py-3 px-6 rounded-md transition-all inline-block">查看更多文章</a>
+            </div>
+        </div>
+    </section>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <svg class="h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        <span class="ml-2 text-xl font-bold">All rights reserved</span>
+                    </div>
+        </div>
+    </footer>
+
+    <script>
+        // 简单的滚动效果
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
